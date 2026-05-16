@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ========== ELITE SEO META TAGS ========== -->
+    <title>Free QR Code Generator | Instant, Customizable & High-Quality</title>
+    <meta name="description" content="Create stunning QR codes instantly. Free, customizable colors, instant download in PNG. No signup required. Perfect for marketing, business & personal use.">
+    <meta name="keywords" content="QR code generator, free QR code, instant QR code, customizable QR code, QR code maker, PNG download">
+    <meta name="author" content="Premium Tools">
+    <meta name="robots" content="index, follow">
+    <meta name="canonical" href="https://qrcodegenerator.pro/">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Free QR Code Generator | Instant & Customizable">
+    <meta property="og:description" content="Generate custom QR codes instantly. Free, no signup, beautiful design. Perfect for business marketing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qrcodegenerator.pro/">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free QR Code Generator | Instant & Customizable">
+    <meta name="twitter:description" content="Create custom QR codes instantly. Free tool with beautiful UI.">
+    
+    <!-- ========== EXTERNAL LIBRARY ========== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <!-- ========== STYLE ========== -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== CSS VARIABLES - PREMIUM PALETTE ===== */
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --accent: #a78bfa;
+            --accent-vibrant: #c084fc;
+            --success: #10b981;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --surface-secondary: #f1f5f9;
+            --border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.7);
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.08);
+            --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.12);
+            --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.16);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.15s ease-out;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, var(--background) 0%, #f0f4f8 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== CONTAINER & LAYOUT ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 40px 0 60px;
+            text-align: center;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .header-content h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-vibrant) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .header-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        /* ===== MAIN CONTENT GRID ===== */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* ===== FORM SECTION ===== */
+        .form-section {
+            background: var(--surface);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .form-section:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.85rem;
+        }
+
+        input[type="text"],
+        input[type="color"],
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--surface-secondary);
+            color: var(--text-primary);
+            transition: var(--transition-fast);
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            background: var(--surface);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        /* ===== COLOR PICKER SECTION ===== */
+        .color-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .color-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .color-picker-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        input[type="color"] {
+            width: 60px;
+            height: 50px;
+            padding: 4px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .color-value {
+            flex: 1;
+            padding: 12px 16px;
+            background: var(--surface-secondary);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* ===== ACTION BUTTONS ===== */
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        @media (max-width: 480px) {
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        button {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--surface-secondary);
+            color: var(--text-primary);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+            border-color: var(--primary);
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+            grid-column: 1 / -1;
+            padding: 16px 24px;
+            font-size: 1.05rem;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-download:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ===== PREVIEW SECTION ===== */
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInRight 0.8s ease-out 0.2s both;
+        }
+
+        .preview-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            width: 100%;
+            max-width: 400px;
+            transition: var(--transition);
+        }
+
+        .preview-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .qr-container {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 280px;
+            max-height: 280px;
+            filter: drop-shadow(0 4px 12px rgba(15, 23, 42, 0.1));
+        }
+
+        .qr-placeholder {
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .qr-placeholder svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .preview-info {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .preview-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid var(--border);
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 30px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: var(--transition);
+        }
+
+        .feature:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(167, 139, 250, 0.1) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.8rem;
+        }
+
+        .feature h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .feature p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            margin-top: 100px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--surface);
+            color: var(--text-primary);
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            animation: slideInUp 0.3s ease-out;
+            z-index: 1000;
+        }
+
+        .toast.success {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.05);
+            color: var(--success);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header {
+                padding: 30px 0 40px;
+            }
+
+            .header-content h1 {
+                font-size: 2rem;
+            }
+
+            .form-section {
+                padding: 30px 20px;
+            }
+
+            .color-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-card {
+                min-height: 350px;
+            }
+
+            footer {
+                margin-top: 60px;
+                padding: 30px 0;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+
+            header {
+                padding: 24px 0 32px;
+            }
+
+            .header-content h1 {
+                font-size: 1.75rem;
+            }
+
+            .header-content p {
+                font-size: 1rem;
+            }
+
+            .content {
+                gap: 20px;
+            }
+
+            .form-section,
+            .preview-card {
+                padding: 24px;
+                border-radius: 16px;
+            }
+
+            .button-group {
+                margin-top: 24px;
+            }
+
+            .toast {
+                bottom: 16px;
+                right: 16px;
+                left: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <h1>QR Code Generator</h1>
+                <p>Create stunning, customizable QR codes instantly. Free, no signup required.</p>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- FORM SECTION -->
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="urlInput">Enter URL or Text</label>
+                    <textarea id="urlInput" placeholder="https://example.com or your custom text..." maxlength="2953"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Customize Colors</label>
+                    <div class="color-inputs">
+                        <div class="color-group">
+                            <label style="text-transform: none; font-weight: 500; font-size: 0.9rem; margin-bottom: 8px;">Foreground (Dark)</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="foregroundColor" value="#000000">
+                                <span class="color-value" id="foregroundValue">#000000</span>
+                            </div>
+                        </div>
+                        <div class="color-group">
+                            <label style="text-transform: none; font-weight: 500; font-size: 0.9rem; margin-bottom: 8px;">Background (Light)</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="backgroundColor" value="#ffffff">
+                                <span class="color-value" id="backgroundValue">#FFFFFF</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-secondary" id="resetBtn">Reset</button>
+                    <button class="btn-primary" id="generateBtn">Generate</button>
+                </div>
+
+                <button class="btn-download" id="downloadBtn" disabled>⬇ Download PNG</button>
+            </div>
+
+            <!-- PREVIEW SECTION -->
+            <div class="preview-section">
+                <div class="preview-card">
+                    <div class="qr-container" id="qrContainer">
+                        <div class="qr-placeholder">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="4" height="4"></rect>
+                                <path d="M11 11h2v2h-2z"></path>
+                                <path d="M8 8h2v2H8z"></path>
+                            </svg>
+                            <p>Your QR code will appear here</p>
+                        </div>
+                    </div>
+                    <div class="preview-info">
+                        <p id="previewStatus">Ready to generate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURES SECTION -->
+        <section class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Generation</h3>
+                <p>Real-time preview as you type. No delays, no waiting.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <h3>Fully Customizable</h3>
+                <p>Choose any colors to match your brand or design.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💾</div>
+                <h3>High-Quality Download</h3>
+                <p>Download in crisp PNG format, perfect for any use.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h3>100% Private</h3>
+                <p>No tracking, no data collection, completely secure.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile Ready</h3>
+                <p>Works perfectly on all devices and screen sizes.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h3>Always Free</h3>
+                <p>No signup, no ads, completely free to use forever.</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>&copy; 2026 Premium QR Code Generator. Built with precision. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // ===== STATE MANAGEMENT =====
+        const state = {
+            qrCodeInstance: null,
+            hasGenerated: false,
+            currentText: '',
+            foregroundColor: '#000000',
+            backgroundColor: '#ffffff'
+        };
+
+        // ===== DOM ELEMENTS =====
+        const urlInput = document.getElementById('urlInput');
+        const foregroundColor = document.getElementById('foregroundColor');
+        const backgroundColor = document.getElementById('backgroundColor');
+        const foregroundValue = document.getElementById('foregroundValue');
+        const backgroundValue = document.getElementById('backgroundValue');
+        const generateBtn = document.getElementById('generateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const qrContainer = document.getElementById('qrContainer');
+        const previewStatus = document.getElementById('previewStatus');
+
+        // ===== DEBOUNCE UTILITY =====
+        function debounce(func, delay) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func(...args), delay);
+            };
+        }
+
+        // ===== COLOR PICKER HANDLERS =====
+        foregroundColor.addEventListener('input', (e) => {
+            const value = e.target.value.toUpperCase();
+            state.foregroundColor = value;
+            foregroundValue.textContent = value;
+            if (state.hasGenerated && state.currentText) {
+                generateQRCode();
+            }
+        });
+
+        backgroundColor.addEventListener('input', (e) => {
+            const value = e.target.value.toUpperCase();
+            state.backgroundColor = value;
+            backgroundValue.textContent = value;
+            if (state.hasGenerated && state.currentText) {
+                generateQRCode();
+            }
+        });
+
+        // ===== INPUT HANDLER WITH DEBOUNCE =====
+        const handleInput = debounce(() => {
+            const text = urlInput.value.trim();
+            if (text && text.length > 0) {
+                state.currentText = text;
+                if (state.hasGenerated) {
+                    generateQRCode();
+                }
+                previewStatus.textContent = `${text.length} characters`;
+            } else {
+                previewStatus.textContent = 'Enter text or URL to generate';
+                clearQRCode();
+            }
+        }, 300);
+
+        urlInput.addEventListener('input', handleInput);
+
+        // ===== GENERATE QR CODE =====
+        function generateQRCode() {
+            const text = state.currentText || urlInput.value.trim();
+
+            if (!text) {
+                showToast('Please enter a URL or text', false);
+                return;
+            }
+
+            // Clear previous QR code
+            clearQRCode();
+
+            try {
+                // Create new QR code with custom colors
+                const qrCode = new QRCode(qrContainer, {
+                    text: text,
+                    width: 280,
+                    height: 280,
+                    colorDark: state.foregroundColor,
+                    colorLight: state.backgroundColor,
+                    correctLevel: QRCode.CorrectLevel.H,
+                });
+
+                state.qrCodeInstance = qrCode;
+                state.hasGenerated = true;
+                downloadBtn.disabled = false;
+                previewStatus.textContent = '✓ QR code generated successfully';
+                showToast('QR code generated!', true);
+            } catch (error) {
+                previewStatus.textContent = '✗ Error generating QR code';
+                showToast('Error: Invalid input or too long', false);
+            }
+        }
+
+        // ===== CLEAR QR CODE =====
+        function clearQRCode() {
+            const canvas = qrContainer.querySelector('canvas');
+            if (canvas) {
+                canvas.remove();
+            }
+            // Show placeholder again
+            const placeholder = document.createElement('div');
+            placeholder.className = 'qr-placeholder';
+            placeholder.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="4" height="4"></rect>
+                    <path d="M11 11h2v2h-2z"></path>
+                    <path d="M8 8h2v2H8z"></path>
+                </svg>
+                <p>Your QR code will appear here</p>
+            `;
+            qrContainer.innerHTML = '';
+            qrContainer.appendChild(placeholder);
+        }
+
+        // ===== DOWNLOAD QR CODE =====
+        downloadBtn.addEventListener('click', () => {
+            const canvas = qrContainer.querySelector('canvas');
+            if (canvas) {
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = `qrcode-${Date.now()}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showToast('QR code downloaded!', true);
+            }
+        });
+
+        // ===== GENERATE BUTTON =====
+        generateBtn.addEventListener('click', generateQRCode);
+
+        // ===== RESET BUTTON =====
+        resetBtn.addEventListener('click', () => {
+            urlInput.value = '';
+            foregroundColor.value = '#000000';
+            backgroundColor.value = '#ffffff';
+            foregroundValue.textContent = '#000000';
+            backgroundValue.textContent = '#FFFFFF';
+            state.currentText = '';
+            state.hasGenerated = false;
+            state.qrCodeInstance = null;
+            downloadBtn.disabled = true;
+            clearQRCode();
+            previewStatus.textContent = 'Enter text or URL to generate';
+            showToast('Form reset', true);
+        });
+
+        // ===== TOAST NOTIFICATION =====
+        function showToast(message, isSuccess = true) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${isSuccess ? 'success' : ''}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideInUp 0.3s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // ===== INITIAL STATE =====
+        previewStatus.textContent = 'Enter text or URL to generate';
+    </script>
+</body>
+</html>
